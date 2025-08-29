@@ -13,13 +13,14 @@ jobs:
   hello:
     runs-on: ubuntu-latest
     services:
-      image: postgres:15
-      env:
-        POSTGRES_USER: siddique
-        POSTGRES_PASSWORD: password
-        POSTGRES_DB: database_test
-      ports:
-        - 5432:5432
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: siddique
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: database_test
+        ports:
+          - 5432:5432
     steps:
       - name: checkout code
         uses: actions/checkout@v3
