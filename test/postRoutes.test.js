@@ -3,17 +3,16 @@ const { execSync } = require('child_process');
 const { app } = require("../index");
 const { sequelize, User, Post } = require('../models');
 
-
-beforeEach(async()=>{
+beforeEach(async() => {
     execSync("npx sequelize-cli db:migrate:undo:all --env test")
     execSync("npx sequelize-cli db:migrate --env test")
-})
-
-beforeEach(async() => {
     await User.create({ name: "ali", email: "ali@gmail.com", password: "****" })
     await User.create({ name: "ahmed", email: "ahmed@gmail.com", password: "****" })
 })
 
+afterAll(async()=>{
+    await sequelize.close();
+})
 
 describe("get all the posts", ()=>{
     it("should return all the posts", async()=>{
